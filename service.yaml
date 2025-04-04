@@ -4,11 +4,11 @@ metadata:
   labels:
     app: register-app
   name: my-service
-  namespace: my-register-ns
+  namespace: app-ns
 spec:
   type: NodePort
   ports:
-    - port: 80 # The port the service is exposed on
+    - port: 8080 # The port the service is exposed on
       targetPort: 3000 # The port your application is listening on
   selector:
     app: register-app
