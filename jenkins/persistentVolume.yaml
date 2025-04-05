@@ -15,9 +15,9 @@ spec:
   storageClassName: localstorage
   claimRef:
     name: pvc-jenkins
-    namespace: devops-tool-suite
+    namespace: jenkins-ns
   capacity:
-    storage: 10Gi
+    storage: 5Gi
   accessModes:
     - ReadWriteOnce
   local:
@@ -29,13 +29,14 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - worker-node01
+                - my-cluster-dev-worker # worker-node01
+                - my-cluster-dev-worker2
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: pvc-jenkins
-  namespace: devops-tool-suite
+  namespace: jenkins-ns
 spec:
   storageClassName: localstorage
   accessModes:

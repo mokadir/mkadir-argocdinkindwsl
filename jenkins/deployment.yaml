@@ -1,29 +1,57 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: jenkins
-  name: my-deployment
+  name: deployment-jenkins
   namespace: jenkins-ns
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: jenkins
+      app: server-jenkins
   template:
     metadata:
       labels:
-        app: jenkins
+        app: server-jenkins
     spec:
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+      serviceAccountName: admin-jenkins
       containers:
-        - name: jenkins
+        - name: deployment-jenkins
           image: jenkins/jenkins:jdk17
           resources:
             limits:
-              memory: 2000Mi
-              cpu: "2.0"
+              memory: "2Gi"
+              cpu: "1000m"
             requests:
-              memory: 1500Mi
-              cpu: "1.5"
+              memory: "500Mi"
+              cpu: "500m"
           ports:
-            - containerPort: 8080 # The port your application is listening on. match with targetPort in service.yaml and docker webserver exposed port
+            - name: httpport
+              containerPort: 8080
+            - name: jnlpport
+              containerPort: 50000
+          livenessProbe:
+            httpGet:
+              path: "/login"
+              port: 8080
+            initialDelaySeconds: 90
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: "/login"
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          volumeMounts:
+            - name: data-jenkins
+              mountPath: /var/jenkins_home
+      volumes:
+        - name: data-jenkins
+          persistentVolumeClaim:
+            claimName: pvc-jenkins
