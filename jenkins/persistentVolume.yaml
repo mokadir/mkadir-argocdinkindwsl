@@ -29,7 +29,7 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - my-cluster-dev-worker # worker-node01
+                - my-cluster-dev-worker # If the pod gets deleted or restarted, the data will get persisted in the node volume. However, if the node gets deleted, you will lose all the data.
                 - my-cluster-dev-worker2
 ---
 apiVersion: v1
