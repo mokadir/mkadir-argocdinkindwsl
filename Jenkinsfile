@@ -3,7 +3,7 @@ pipeline {
 	
 	tools {
 		maven 'maven3'
-	
+		docker 'Docker'
 	}
 	
 	stages {
@@ -43,12 +43,12 @@ pipeline {
 			} 
 		} */
 				
-    	stage ('Unit Test'){
+/*     	stage ('Unit Test'){
 			steps {
 				echo "****** Unit Test running....******"
 				sh "mvn test -DskipTests=true" 
 			}
-		} 
+		}  */
 
 		
 /*  	stage ('File System Scan'){
