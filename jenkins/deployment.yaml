@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: jenkins
+  name: my-deployment
+  namespace: jenkins-ns
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins:jdk17
+          resources:
+            limits:
+              memory: 2000Mi
+              cpu: "2.0"
+            requests:
+              memory: 1500Mi
+              cpu: "1.5"
+          ports:
+            - containerPort: 8080 # The port your application is listening on. match with targetPort in service.yaml and docker webserver exposed port
