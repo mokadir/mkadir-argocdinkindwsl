@@ -26,4 +26,4 @@ spec:
               memory: 256Mi
               cpu: "0.3"
           ports:
-            - containerPort: 3000
+            - containerPort: 8080 # The port your application is listening on. match with targetPort in service.yaml and docker webserver exposed port

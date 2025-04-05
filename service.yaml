@@ -9,7 +9,7 @@ spec:
   type: NodePort
   ports:
     - nodePort: 30001 # The port on the node to expose the service on. match with extraPortMappings containerPort in kind config
-      port: 8080 # The port the service is exposed on
-      targetPort: 3000 # The port your application is listening on. match with containerPort in deployment.yaml
+      port: 80 # The port the service is exposed on. can be anty port, but 80 is standard for HTTP
+      targetPort: 8080 # The port your application is listening on. match with containerPort in deployment.yaml and docker webserver exposed port
   selector:
     app: register-app
