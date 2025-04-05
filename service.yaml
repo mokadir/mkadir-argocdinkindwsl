@@ -8,7 +8,8 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 8080 # The port the service is exposed on
-      targetPort: 3000 # The port your application is listening on
+    - nodePort: 30001 # The port on the node to expose the service on. match with extraPortMappings containerPort in kind config
+      port: 8080 # The port the service is exposed on
+      targetPort: 3000 # The port your application is listening on. match with containerPort in deployment.yaml
   selector:
     app: register-app
