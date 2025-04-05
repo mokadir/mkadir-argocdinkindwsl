@@ -14,21 +14,13 @@ pipeline {
 			}
 		}
 	
-/* 		stage ('Git Checkout'){
+		stage ('Git Checkout'){
 			steps {
                 echo "****** Git Checkout running....******"
 				git branch: 'dev', credentialsId: 'git-cred', url: 'https://github.com/mokadir/mkadir-argocdinkindwsl.git/registerapp/'
 			}
-		} */
+		}
 
-		stage("Git Checkout"){
-            steps{
-                dir("registerapp"){
-                    git url: "https://github.com/mokadir/mkadir-argocdinkindwsl.git" , branch: "dev", credentialsId: "git-cred"
-                }
-            }
-        }
-		
 		stage ('Compile'){
 			steps {
                 echo "****** Compile running....******"
