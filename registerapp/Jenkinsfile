@@ -14,12 +14,18 @@ pipeline {
 			}
 		}
 	
-		stage ('Git Checkout'){
+/* 		stage ('Git Checkout'){
 			steps {
                 echo "****** Git Checkout running....******"
 				git branch: 'dev', credentialsId: 'git-cred', url: 'https://github.com/mokadir/mkadir-argocdinkindwsl.git/registerapp/'
 			}
-		}
+		} */
+
+		stage('Git Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/dev']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/mokadir/mkadir-argocdinkindwsl.git']]], scriptPath: 'registerapp')
+           }
+        }
 		
 		stage ('Compile'){
 			steps {
