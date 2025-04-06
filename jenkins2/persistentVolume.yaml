@@ -12,7 +12,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: localstorage
+  storageClassName: localstorage2
   claimRef:
     name: pvc2-jenkins
     namespace: jenkins2-ns
@@ -38,7 +38,7 @@ metadata:
   name: pvc2-jenkins
   namespace: jenkins2-ns
 spec:
-  storageClassName: localstorage
+  storageClassName: localstorage2
   accessModes:
     - ReadWriteOnce
   resources:
