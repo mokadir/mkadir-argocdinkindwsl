@@ -1,7 +1,7 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: local-storage
+  name: local-storage2
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
 ---
@@ -12,7 +12,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: localstorage2
+  storageClassName: localstorage
   claimRef:
     name: pvc2-jenkins
     namespace: jenkins2-ns
@@ -38,7 +38,7 @@ metadata:
   name: pvc2-jenkins
   namespace: jenkins2-ns
 spec:
-  storageClassName: localstorage2
+  storageClassName: localstorage
   accessModes:
     - ReadWriteOnce
   resources:
