@@ -20,4 +20,4 @@ RUN rm sonar-scanner-cli-4.6.2.2472-linux.zip
 RUN usermod -aG sudo jenkins
 RUN echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-# USER jenkins # switch back to jenkins user is best practice
+USER jenkins
