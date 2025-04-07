@@ -53,7 +53,7 @@ pipeline {
 		}  */
 
 		stage ('Docker Build & Tag'){
-			agent any
+			
 			steps {
 				script {
                     echo "****** Docker Build and Tag Image running....******"
@@ -72,7 +72,7 @@ pipeline {
 		}  */ //need lot of ram
 		
 		stage ('Docker Push'){
-			agent any
+			
 			steps {
 				script {
                     echo "****** Docker Push Image running....******"
