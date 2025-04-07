@@ -19,7 +19,7 @@ spec:
       serviceAccountName: jenkins # user admin-jenkins previously
       containers:
         - name: deployment-jenkins
-          image: mokadir/jenkins:lts-jdk17
+          image: mokadir/jenkins:lts-jdk17-0
           resources:
             limits:
               memory: "2Gi"
