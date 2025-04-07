@@ -1,6 +1,6 @@
 pipeline {
 	agent any
-	
+
 	stages {
 		stage ('Clean Workspace'){
 			steps {
@@ -12,7 +12,7 @@ pipeline {
 		stage ('Git Checkout'){
 			steps {
                 echo "****** Git Checkout running....******"
-				git branch: 'dev', credentialsId: 'git-cred', url: 'https://github.com/mokadir/mkadir-argocdinkindwsl.git'
+				git branch: 'dev', credentialsId: 'github-cred', url: 'https://github.com/mokadir/mkadir-argocdinkindwsl.git'
 			}
 		}
 
@@ -58,7 +58,7 @@ pipeline {
 			steps {
 				script {
                     echo "****** Docker Build and Tag Image running....******"
-					withDockerRegistry(credentialsId: 'docker-cred') {
+					withDockerRegistry(credentialsId: 'dockerhub-cred') {
 						sh "docker build -t mokadir/mkadir-registerapp:latest ."
 					}
 				}
@@ -77,7 +77,7 @@ pipeline {
 			steps {
 				script {
                     echo "****** Docker Push Image running....******"
-					withDockerRegistry(credentialsId: 'docker-cred') {
+					withDockerRegistry(credentialsId: 'dockerhub-cred') {
 						sh "docker push mokadir/mkadir-registerapp:latest"
 					}
 				}
