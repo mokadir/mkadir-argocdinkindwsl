@@ -24,7 +24,7 @@ pipeline {
 			steps {
 				script {
                     echo "****** Docker Build and Tag Image running....******"
-					withDockerRegistry(credentialsId: 'docerhub-cred') {
+					withDockerRegistry(credentialsId: 'dockerhub-cred') {
 						sh "docker build -t mokadir/mkadir-cafeapp:1 ."
 					}
 				}
@@ -35,7 +35,7 @@ pipeline {
 			steps {
 				script {
                     echo "****** Docker Push Image running....******"
-					withDockerRegistry(credentialsId: 'docerhub-cred') {
+					withDockerRegistry(credentialsId: 'dockerhub-cred') {
 						sh "docker push mokadir/mkadir-cafeapp:1"
 					}
 				}
