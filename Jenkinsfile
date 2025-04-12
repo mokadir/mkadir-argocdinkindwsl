@@ -1,7 +1,5 @@
 pipeline {
 	agent any
-
-
 	
 	stages {
 		stage ('Clean Workspace'){
@@ -25,7 +23,10 @@ pipeline {
 				script {
                     echo "****** Docker Build and Tag Image running....******"
 					withDockerRegistry(credentialsId: 'dockerhub-cred') {
-						sh "docker build -t mokadir/mkadir-cafeapp:1 ."
+						// sh "docker build -t mokadir/mkadir-cafeapp:1 ."
+						docker.withTool('docker') {
+							docker.build("mokadir/mkadir-cafeapp:1", "-f Dockerfile .")
+						}
 					}
 				}
 			}
