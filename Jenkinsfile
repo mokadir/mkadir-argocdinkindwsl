@@ -1,9 +1,7 @@
 pipeline {
 	agent any
 
-	tools{
-		DockerTool 'docker'
-	}
+
 	
 	stages {
 		stage ('Clean Workspace'){
