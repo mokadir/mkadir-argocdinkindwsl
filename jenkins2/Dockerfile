@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:lts-jdk17
+FROM jenkins/jenkins:lts-jdk21-alpine
 USER root
 RUN apt-get update
 RUN apt-get install -y maven git unzip curl wget gnupg sudo
