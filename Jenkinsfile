@@ -12,7 +12,7 @@ pipeline {
 		stage ('Git Checkout'){
 			steps {
                 echo "****** Git Checkout running....******"
-				git branch: 'dev', credentialsId: 'github-cred', url: 'https://github.com/mokadir/cafeapp.git'
+				git branch: 'dev', credentialsId: 'git-cred', url: 'https://github.com/mokadir/cafeapp.git'
 			}
 		}
 /*		This app do not need compilation. its already compiled and ready to run. so no need to build it again. */
@@ -22,7 +22,7 @@ pipeline {
 			steps {
 				script {
                     echo "****** Docker Build and Tag Image running....******"
-					withDockerRegistry(credentialsId: 'dockerhub-cred') {
+					withDockerRegistry(credentialsId: 'docker-cred') {
 						// sh "docker build -t mokadir/mkadir-cafeapp:1 ."
 						docker.withTool('docker') {
 							docker.build("mokadir/mkadir-cafeapp:1", "-f Dockerfile .")
@@ -36,7 +36,7 @@ pipeline {
 			steps {
 				script {
                     echo "****** Docker Push Image running....******"
-					withDockerRegistry(credentialsId: 'dockerhub-cred') {
+					withDockerRegistry(credentialsId: 'docker-cred') {
 						sh "docker push mokadir/mkadir-cafeapp:1"
 					}
 				}
