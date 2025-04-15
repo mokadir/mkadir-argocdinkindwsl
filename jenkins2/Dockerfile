@@ -1,8 +1,18 @@
-FROM jenkins/jenkins:lts-jdk21-alpine
+FROM jenkins/jenkins:lts-jdk21
 USER root
 RUN apt-get update
 RUN apt-get install -y maven git unzip curl wget gnupg sudo
 # RUN apt-get install -y docker.io # runing docker in docker container is complicated
+
+RUN apt-get update && apt-get install -y lsb-release ca-certificates && \
+    install -m 0755 -d /etc/apt/keyrings && \
+    curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc && \
+    chmod a+r /etc/apt/keyrings/docker.asc && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] \
+    https://download.docker.com/linux/debian $(. /etc/os-release && echo \"$VERSION_CODENAME\") stable" \
+    | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+    apt-get update && apt-get install -y docker-ce-cli && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN curl -LO https://dl.k8s.io/release/v1.32.0/bin/linux/amd64/kubectl
 RUN install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl

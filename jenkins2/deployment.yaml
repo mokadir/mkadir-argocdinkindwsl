@@ -19,7 +19,14 @@ spec:
       serviceAccountName: jenkins # user admin-jenkins previously
       containers:
         - name: deployment-jenkins
-          image: mokadir/jenkins:lts-jdk17-0
+          image: mokadir/jenkins:lts-jdk21
+          env:
+            - name: DOCKER_HOST
+              value: "tcp://docker:2376"
+            - name: DOCKER_CERT_PATH
+              value: "/certs/client"
+            - name: DOCKER_TLS_VERIFY
+              value: "1"
           resources:
             limits:
               memory: "2Gi"
@@ -51,6 +58,9 @@ spec:
           volumeMounts:
             - name: data-jenkins
               mountPath: /var/jenkins_home
+            - name: jenkins-docker-certs
+              mountPath: /certs/client
+              readOnly: true
       volumes:
         - name: data-jenkins
           persistentVolumeClaim:
