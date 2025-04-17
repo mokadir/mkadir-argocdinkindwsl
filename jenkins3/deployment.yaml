@@ -58,9 +58,10 @@ spec:
           volumeMounts:
             - name: data-jenkins
               mountPath: /var/jenkins_home
-            - name: jenkins-docker-certs
-              mountPath: /certs/client
-              readOnly: true
+          #- name: jenkins-docker-certs
+      # mountPath: /certs/client
+      #readOnly: true
+
       volumes:
         - name: data-jenkins
           persistentVolumeClaim:
