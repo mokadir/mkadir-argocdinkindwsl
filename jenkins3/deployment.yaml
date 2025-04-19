@@ -24,7 +24,7 @@ spec:
             - name: DOCKER_HOST
               value: "tcp://docker:2376"
             - name: DOCKER_CERT_PATH
-              value: "/certs/client" # "/etc/docker/certificates/server" #"/certs/client"
+              value: "/etc/docker/certificates/server" #"/certs/client"
             - name: DOCKER_TLS_VERIFY
               value: "1"
           resources:
@@ -59,7 +59,7 @@ spec:
             - name: data-jenkins
               mountPath: /var/jenkins_home
             - name: jenkins-docker-certs
-              mountPath: /certs/client #/etc/docker/certificates/server
+              mountPath: /etc/docker/certificates/server
               readOnly: true
       volumes:
         - name: data-jenkins
