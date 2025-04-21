@@ -15,3 +15,16 @@ spec:
     - port: 80
       targetPort: 8080
       nodePort: 30002
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-jenkins-jnlp
+  namespace: jenkins-ns
+spec:
+  selector:
+    app: server-jenkins
+  type: ClusterIP
+  ports:
+    - port: 50000
+      targetPort: 8080
